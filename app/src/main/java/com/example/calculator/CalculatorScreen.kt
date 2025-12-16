@@ -4,10 +4,12 @@ import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items // <--- CRITICAL IMPORT FIX
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,11 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// --- 1. Screen Composable ---
 @Composable
 fun CalculatorScreen(
     isAdvanced: Boolean,
@@ -31,15 +33,17 @@ fun CalculatorScreen(
 ) {
     val context = LocalContext.current
 
-    // Requirement 5: Check for errors to show Toast
     LaunchedEffect(state) {
         if (state == "Error") {
             Toast.makeText(context, "Invalid Operation", Toast.LENGTH_SHORT).show()
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize().background(Color.DarkGray)) {
-        // Display Area
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.DarkGray)
+    ) {
         Box(
             modifier = Modifier
                 .weight(1f)
@@ -54,29 +58,56 @@ fun CalculatorScreen(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
-        }
 
-        // Keypad Area
-        val buttons = remember(isAdvanced) {
-            if (isAdvanced) advancedButtonList else simpleButtonList
-        }
-
-        // Responsive Grid
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(if (isAdvanced) 5 else 4),
-            modifier = Modifier.weight(2f),
-            contentPadding = PaddingValues(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            // FIX: Ensure 'items' is imported from androidx.compose.foundation.lazy.grid.items
-            items(buttons) { btn ->
-                CalculatorButton(
-                    symbol = btn.symbol,
-                    modifier = Modifier.aspectRatio(if(isAdvanced) 1.5f else 1f),
-                    onClick = { onAction(btn.action) },
-                    color = btn.color
+            IconButton(
+                onClick = onBack,
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(8.dp)
+                    .size(48.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.back_arrow),
+                    contentDescription = "Back",
+                    tint = Color.Unspecified
                 )
+            }
+        }
+
+        Column(
+            modifier = Modifier
+                .weight(2f)
+                .fillMaxWidth()
+                .padding(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            val buttons = remember(isAdvanced) {
+                if (isAdvanced) advancedButtonList else simpleButtonList
+            }
+            val colCount = 4
+
+            val rows = buttons.chunked(colCount)
+
+            rows.forEach { rowButtons ->
+                Row(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    rowButtons.forEach { btn ->
+                        val weight = if ((!isAdvanced && btn.symbol == "0")) 2f else 1f
+
+                        CalculatorButton(
+                            symbol = btn.symbol,
+                            modifier = Modifier
+                                .weight(weight)
+                                .fillMaxHeight(),
+                            onClick = { onAction(btn.action) },
+                            color = btn.color
+                        )
+                    }
+                }
             }
         }
     }
@@ -93,6 +124,8 @@ fun CalculatorButton(
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
+            // Use CircleShape or RoundedCornerShape depending on preference.
+            // RoundedCornerShape adapts better when buttons become wide rectangles in landscape.
             .clip(CircleShape)
             .background(color)
             .clickable { onClick() }

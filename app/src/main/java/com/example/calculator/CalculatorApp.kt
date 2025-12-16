@@ -9,15 +9,13 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun CalculatorApp() {
     val navController = rememberNavController()
-    // ViewModel is scoped to the NavHost to survive navigation if needed,
-    // or scoped to individual screens. Here we use a fresh VM for the calculator.
 
     NavHost(navController = navController, startDestination = "menu") {
         composable("menu") {
             MenuScreen(
                 onSimpleClick = { navController.navigate("calculator/simple") },
                 onAdvancedClick = { navController.navigate("calculator/advanced") },
-                onExitClick = { System.exit(0) } // Requirement 2: Close App
+                onExitClick = { System.exit(0) }
             )
         }
         composable("calculator/{type}") { backStackEntry ->

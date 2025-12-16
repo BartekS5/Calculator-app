@@ -25,7 +25,7 @@ fun MenuScreen(onSimpleClick: () -> Unit, onAdvancedClick: () -> Unit, onExitCli
         verticalArrangement = Arrangement.Center
     ) {
         Text("My Calculator App", style = MaterialTheme.typography.headlineMedium)
-        Text("Author: John Doe", style = MaterialTheme.typography.bodyLarge)
+        Text("Author: Suk Makok", style = MaterialTheme.typography.bodyLarge)
         Text("A simple and advanced calculator for Android.", style = MaterialTheme.typography.bodyMedium)
 
         Spacer(modifier = Modifier.height(32.dp))

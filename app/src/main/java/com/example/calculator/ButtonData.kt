@@ -2,7 +2,11 @@ package com.example.calculator
 
 import androidx.compose.ui.graphics.Color
 
-data class ButtonData(val symbol: String, val action: CalculatorAction, val color: Color = Color.Gray)
+data class ButtonData(
+    val symbol: String,
+    val action: CalculatorAction,
+    val color: Color = Color.Gray
+)
 
 // Define colors
 val OpColor = Color(0xFFFF9800) // Orange
@@ -10,64 +14,71 @@ val NumColor = Color(0xFF616161) // Dark Gray
 val FuncColor = Color(0xFF2196F3) // Blue (for advanced)
 
 val simpleButtonList = listOf(
-    ButtonData("AC/C", CalculatorAction.Clear, Color.LightGray),
-    ButtonData("+/-", CalculatorAction.SignChange, Color.LightGray),
-    ButtonData("%", CalculatorAction.MathFunction("%"), Color.LightGray),
+    ButtonData("AC", CalculatorAction.Clear, Color.LightGray),
+    ButtonData("+/-", CalculatorAction.Operation("*(-1)"), Color.LightGray),
+    ButtonData("bksp", CalculatorAction.Delete, Color.LightGray),
     ButtonData("/", CalculatorAction.Operation("/"), OpColor),
 
-    ButtonData("7", CalculatorAction.Number(7), NumColor),
-    ButtonData("8", CalculatorAction.Number(8), NumColor),
-    ButtonData("9", CalculatorAction.Number(9), NumColor),
-    ButtonData("x", CalculatorAction.Operation("*"), OpColor),
+    ButtonData("7", CalculatorAction.Number("7"), NumColor),
+    ButtonData("8", CalculatorAction.Number("8"), NumColor),
+    ButtonData("9", CalculatorAction.Number("9"), NumColor),
+    ButtonData("*", CalculatorAction.Operation("*"), OpColor),
 
-    ButtonData("4", CalculatorAction.Number(4), NumColor),
-    ButtonData("5", CalculatorAction.Number(5), NumColor),
-    ButtonData("6", CalculatorAction.Number(6), NumColor),
+    ButtonData("4", CalculatorAction.Number("4"), NumColor),
+    ButtonData("5", CalculatorAction.Number("5"), NumColor),
+    ButtonData("6", CalculatorAction.Number("6"), NumColor),
     ButtonData("-", CalculatorAction.Operation("-"), OpColor),
 
-    ButtonData("1", CalculatorAction.Number(1), NumColor),
-    ButtonData("2", CalculatorAction.Number(2), NumColor),
-    ButtonData("3", CalculatorAction.Number(3), NumColor),
+    ButtonData("1", CalculatorAction.Number("1"), NumColor),
+    ButtonData("2", CalculatorAction.Number("2"), NumColor),
+    ButtonData("3", CalculatorAction.Number("3"), NumColor),
     ButtonData("+", CalculatorAction.Operation("+"), OpColor),
 
-    ButtonData("0", CalculatorAction.Number(0), NumColor),
-    ButtonData(".", CalculatorAction.Decimal, NumColor),
+    ButtonData("0", CalculatorAction.Number("0"), NumColor),
+    ButtonData(".", CalculatorAction.Number("."), NumColor),
     ButtonData("=", CalculatorAction.Calculate, OpColor)
 )
 
 val advancedButtonList = listOf(
     // Row 1
+    ButtonData("AC", CalculatorAction.Clear, Color.LightGray),
+    ButtonData("bksp", CalculatorAction.Delete, Color.LightGray),
+    ButtonData("+/-", CalculatorAction.Operation("*(-1)"), Color.LightGray),
+    ButtonData("%", CalculatorAction.Operation("/100)"), Color.LightGray),
+
+    // Row 2
     ButtonData("sin", CalculatorAction.MathFunction("sin"), FuncColor),
     ButtonData("cos", CalculatorAction.MathFunction("cos"), FuncColor),
     ButtonData("tan", CalculatorAction.MathFunction("tan"), FuncColor),
-    ButtonData("AC", CalculatorAction.Clear, Color.LightGray),
-    ButtonData("/", CalculatorAction.Operation("/"), OpColor),
-
-    // Row 2
-    ButtonData("ln", CalculatorAction.MathFunction("ln"), FuncColor),
-    ButtonData("7", CalculatorAction.Number(7), NumColor),
-    ButtonData("8", CalculatorAction.Number(8), NumColor),
-    ButtonData("9", CalculatorAction.Number(9), NumColor),
-    ButtonData("x", CalculatorAction.Operation("*"), OpColor),
+    ButtonData("ln", CalculatorAction.MathFunction("log"), FuncColor),
 
     // Row 3
-    ButtonData("log", CalculatorAction.MathFunction("log"), FuncColor),
-    ButtonData("4", CalculatorAction.Number(4), NumColor),
-    ButtonData("5", CalculatorAction.Number(5), NumColor),
-    ButtonData("6", CalculatorAction.Number(6), NumColor),
-    ButtonData("-", CalculatorAction.Operation("-"), OpColor),
+    ButtonData("sqrt", CalculatorAction.MathFunction("sqrt"), FuncColor),
+    ButtonData("log", CalculatorAction.MathFunction("log10"), FuncColor),
+    ButtonData("x^2", CalculatorAction.Operation("^2"), FuncColor),
+    ButtonData("x^y", CalculatorAction.Operation("^"), FuncColor),
+
+    //Row 4
+    ButtonData("7", CalculatorAction.Number("7"), NumColor),
+    ButtonData("8", CalculatorAction.Number("8"), NumColor),
+    ButtonData("9", CalculatorAction.Number("9"), NumColor),
+    ButtonData("/", CalculatorAction.Operation("/"), OpColor),
+
+    // Row 3
+    ButtonData("4", CalculatorAction.Number("4"), NumColor),
+    ButtonData("5", CalculatorAction.Number("5"), NumColor),
+    ButtonData("6", CalculatorAction.Number("6"), NumColor),
+    ButtonData("*", CalculatorAction.Operation("*"), OpColor),
 
     // Row 4
-    ButtonData("sqrt", CalculatorAction.MathFunction("sqrt"), FuncColor),
-    ButtonData("1", CalculatorAction.Number(1), NumColor),
-    ButtonData("2", CalculatorAction.Number(2), NumColor),
-    ButtonData("3", CalculatorAction.Number(3), NumColor),
-    ButtonData("+", CalculatorAction.Operation("+"), OpColor),
+    ButtonData("1", CalculatorAction.Number("1"), NumColor),
+    ButtonData("2", CalculatorAction.Number("2"), NumColor),
+    ButtonData("3", CalculatorAction.Number("3"), NumColor),
+    ButtonData("-", CalculatorAction.Operation("-"), OpColor),
 
     // Row 5
-    ButtonData("x^2", CalculatorAction.MathFunction("x^2"), FuncColor),
-    ButtonData("x^y", CalculatorAction.Operation("x^y"), FuncColor),
-    ButtonData("0", CalculatorAction.Number(0), NumColor),
-    ButtonData(".", CalculatorAction.Decimal, NumColor),
-    ButtonData("=", CalculatorAction.Calculate, OpColor)
+    ButtonData("0", CalculatorAction.Number("0"), NumColor),
+    ButtonData(".", CalculatorAction.Number("."), NumColor),
+    ButtonData("=", CalculatorAction.Calculate, OpColor),
+    ButtonData("+", CalculatorAction.Operation("+"), OpColor)
 )
