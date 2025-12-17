@@ -50,7 +50,7 @@ class CalculatorViewModel : ViewModel() {
     private fun formatResult(value: Double): String {
         if (value.isNaN() || value.isInfinite()) return "Error"
         return if (value % 1.0 == 0.0) {
-            value.toInt().toString()
+            value.toLong().toString()
         } else {
             value.toString()
         }

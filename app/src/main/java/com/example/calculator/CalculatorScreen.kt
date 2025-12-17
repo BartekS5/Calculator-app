@@ -54,7 +54,7 @@ fun CalculatorScreen(
             Text(
                 text = state,
                 color = Color.White,
-                fontSize = 60.sp,
+                fontSize = 38.sp,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
