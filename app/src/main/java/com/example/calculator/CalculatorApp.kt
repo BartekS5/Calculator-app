@@ -5,6 +5,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import kotlin.system.exitProcess
 
 @Composable
 fun CalculatorApp() {
@@ -15,7 +16,7 @@ fun CalculatorApp() {
             MenuScreen(
                 onSimpleClick = { navController.navigate("calculator/simple") },
                 onAdvancedClick = { navController.navigate("calculator/advanced") },
-                onExitClick = { System.exit(0) }
+                onExitClick = { exitProcess(0) }
             )
         }
         composable("calculator/{type}") { backStackEntry ->

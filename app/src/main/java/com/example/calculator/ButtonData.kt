@@ -43,8 +43,8 @@ val advancedButtonList = listOf(
     // Row 1
     ButtonData("AC", CalculatorAction.Clear, Color.LightGray),
     ButtonData("bksp", CalculatorAction.Delete, Color.LightGray),
-    ButtonData("+/-", CalculatorAction.Operation("*(-1)"), Color.LightGray),
-    ButtonData("%", CalculatorAction.Operation("/100)"), Color.LightGray),
+    ButtonData("(", CalculatorAction.Number("("), Color.LightGray),
+    ButtonData(")", CalculatorAction.Number(")"), Color.LightGray),
 
     // Row 2
     ButtonData("sin", CalculatorAction.MathFunction("sin"), FuncColor),
