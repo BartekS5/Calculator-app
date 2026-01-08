@@ -3,7 +3,9 @@ package com.example.calculator
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -33,6 +35,8 @@ fun CalculatorScreen(
 ) {
     val context = LocalContext.current
 
+    val scrollState = rememberScrollState()
+
     LaunchedEffect(state) {
         if (state == "Error") {
             Toast.makeText(context, "Invalid Operation", Toast.LENGTH_SHORT).show()
@@ -54,9 +58,12 @@ fun CalculatorScreen(
             Text(
                 text = state,
                 color = Color.White,
-                fontSize = 38.sp,
+                fontSize = 45.sp,
+                overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                softWrap = false,
+                modifier = Modifier.horizontalScroll(scrollState)
+
             )
 
             IconButton(
@@ -113,7 +120,6 @@ fun CalculatorScreen(
     }
 }
 
-// --- 2. Button Component ---
 @Composable
 fun CalculatorButton(
     symbol: String,
@@ -124,8 +130,6 @@ fun CalculatorButton(
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            // Use CircleShape or RoundedCornerShape depending on preference.
-            // RoundedCornerShape adapts better when buttons become wide rectangles in landscape.
             .clip(CircleShape)
             .background(color)
             .clickable { onClick() }

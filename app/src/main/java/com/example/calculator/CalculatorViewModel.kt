@@ -6,6 +6,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import net.objecthunter.exp4j.ExpressionBuilder
 
+private fun isOperatorOrDot(char: Char): Boolean {
+    return char in listOf('+', '-', '*', '/', '.')
+}
+
+private fun isOperator(char: Char): Boolean {
+    return char in listOf('+', '-', '*', '/')
+}
+
 class CalculatorViewModel : ViewModel() {
 
     var display by mutableStateOf("")
@@ -16,9 +24,23 @@ class CalculatorViewModel : ViewModel() {
             display = ""
         }
 
+        val lastChar = display.lastOrNull()
+
         when (action) {
-            is CalculatorAction.Number -> display += action.number
-            is CalculatorAction.Operation -> display += action.operation
+            is CalculatorAction.Number -> {
+                if (action.number == ".") {
+                    if (lastChar != null && isOperatorOrDot(lastChar)) {
+                        return
+                    }
+                }
+                display += action.number
+            }
+            is CalculatorAction.Operation -> {
+                if(lastChar != null && isOperator(lastChar)){
+                    return
+                }
+                display += action.operation
+            }
             is CalculatorAction.MathFunction -> display += "${action.function}("
             is CalculatorAction.Calculate -> calculateResult()
             is CalculatorAction.Clear -> display = ""
@@ -64,8 +86,4 @@ sealed class CalculatorAction {
     object Calculate : CalculatorAction()
     object Clear : CalculatorAction()
     object Delete : CalculatorAction()
-
-    // Kept for backward compatibility if needed, but unused in new logic
-    object SignChange : CalculatorAction()
-    object Decimal : CalculatorAction()
 }
