@@ -1,6 +1,8 @@
 package com.example.calculator
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,17 +22,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.calculator.ui.theme.PurpleGrey40
 
 
 @Composable
 fun AboutScreen(
     onBack: () -> Unit
 ){
-    Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
+    Box(
+        modifier = Modifier.background(color = Color(0xFF2196F3)).fillMaxWidth()
+    ){
         IconButton(
             onClick = onBack,
             modifier = Modifier
@@ -44,6 +45,12 @@ fun AboutScreen(
                 tint = Color.Unspecified
             )
         }
+    }
+    Column(
+        modifier = Modifier.fillMaxSize().padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
         Text("My Calculator App", style = MaterialTheme.typography.headlineMedium)
         Text("Author: Bartlomiej Seczkowski 250270", style = MaterialTheme.typography.bodyLarge)
         Text("A simple and advanced calculator for Android.", style = MaterialTheme.typography.bodyMedium)

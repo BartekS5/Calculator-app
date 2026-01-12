@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun MenuScreen(onSimpleClick: () -> Unit, onAdvancedClick: () -> Unit, onExitClick: () -> Unit) {
+fun MenuScreen(onSimpleClick: () -> Unit, onAdvancedClick: () -> Unit, onAboutClick: () -> Unit, onExitClick: () -> Unit) {
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -26,7 +26,6 @@ fun MenuScreen(onSimpleClick: () -> Unit, onAdvancedClick: () -> Unit, onExitCli
     ) {
         Text("My Calculator App", style = MaterialTheme.typography.headlineMedium)
         Text("Author: Bartlomiej Seczkowski 250270", style = MaterialTheme.typography.bodyLarge)
-        Text("A simple and advanced calculator for Android.", style = MaterialTheme.typography.bodyMedium)
 
         Spacer(modifier = Modifier.height(32.dp))
 
@@ -36,6 +35,10 @@ fun MenuScreen(onSimpleClick: () -> Unit, onAdvancedClick: () -> Unit, onExitCli
         Spacer(modifier = Modifier.height(8.dp))
         Button(onClick = onAdvancedClick, modifier = Modifier.fillMaxWidth(0.6f)) {
             Text("Advanced Calculator")
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(onClick = onAboutClick, modifier = Modifier.fillMaxWidth(0.6f)) {
+            Text("About")
         }
         Spacer(modifier = Modifier.height(24.dp))
         OutlinedButton(onClick = onExitClick, modifier = Modifier.fillMaxWidth(0.6f)) {

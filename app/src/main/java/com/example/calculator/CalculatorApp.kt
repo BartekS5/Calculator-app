@@ -16,6 +16,7 @@ fun CalculatorApp() {
             MenuScreen(
                 onSimpleClick = { navController.navigate("calculator/simple") },
                 onAdvancedClick = { navController.navigate("calculator/advanced") },
+                onAboutClick = { navController.navigate("about") },
                 onExitClick = { exitProcess(0) }
             )
         }
@@ -26,6 +27,11 @@ fun CalculatorApp() {
                 isAdvanced = type == "advanced",
                 state = viewModel.display,
                 onAction = viewModel::onAction,
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable("about") {
+            AboutScreen(
                 onBack = { navController.popBackStack() }
             )
         }
