@@ -8,15 +8,14 @@ data class ButtonData(
     val color: Color = Color.Gray
 )
 
-// Define colors
 val OpColor = Color(0xFFFF9800) // Orange
 val NumColor = Color(0xFF616161) // Dark Gray
 val FuncColor = Color(0xFF2196F3) // Blue (for advanced)
 
 val simpleButtonList = listOf(
-    ButtonData("AC", CalculatorAction.Clear, Color.LightGray),
-    ButtonData("+/-", CalculatorAction.Operation("*(-1)"), Color.LightGray),
-    ButtonData("bksp", CalculatorAction.Delete, Color.LightGray),
+    ButtonData("AC", CalculatorAction.Clear, Color.Gray),
+    ButtonData("+/-", CalculatorAction.Operation("*(-1)"), Color.Gray),
+    ButtonData("bksp", CalculatorAction.Delete, Color.Gray),
     ButtonData("/", CalculatorAction.Operation("/"), OpColor),
 
     ButtonData("7", CalculatorAction.Number("7"), NumColor),
@@ -41,10 +40,10 @@ val simpleButtonList = listOf(
 
 val advancedButtonList = listOf(
     // Row 1
-    ButtonData("AC", CalculatorAction.Clear, Color.LightGray),
-    ButtonData("bksp", CalculatorAction.Delete, Color.LightGray),
-    ButtonData("(", CalculatorAction.Number("("), Color.LightGray),
-    ButtonData(")", CalculatorAction.Number(")"), Color.LightGray),
+    ButtonData("AC", CalculatorAction.Clear, Color.Gray),
+    ButtonData("bksp", CalculatorAction.Delete, Color.Gray),
+    ButtonData("(", CalculatorAction.Number("("), Color.Gray),
+    ButtonData(")", CalculatorAction.Number(")"), Color.Gray),
 
     // Row 2
     ButtonData("sin", CalculatorAction.MathFunction("sin"), FuncColor),
@@ -55,7 +54,7 @@ val advancedButtonList = listOf(
     // Row 3
     ButtonData("sqrt", CalculatorAction.MathFunction("sqrt"), FuncColor),
     ButtonData("log", CalculatorAction.MathFunction("log10"), FuncColor),
-    ButtonData("x^2", CalculatorAction.Operation("^2"), FuncColor),
+    ButtonData("+/-", CalculatorAction.Operation("*(-1)"), FuncColor),
     ButtonData("x^y", CalculatorAction.Operation("^"), FuncColor),
 
     //Row 4

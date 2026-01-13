@@ -29,14 +29,18 @@ class CalculatorViewModel : ViewModel() {
         when (action) {
             is CalculatorAction.Number -> {
                 if (action.number == ".") {
-                    if (lastChar != null && isOperatorOrDot(lastChar)) {
+                    val currentNumber = display.takeLastWhile{!isOperator(it)}
+                    if (currentNumber.contains(".")) {
+                        return
+                    }
+                    if (lastChar != null && isOperator(lastChar)) {
                         return
                     }
                 }
                 display += action.number
             }
             is CalculatorAction.Operation -> {
-                if(lastChar != null && isOperator(lastChar)){
+                if(lastChar != null && isOperator(lastChar) || (lastChar == null && action.operation == "*(-1)")){
                     return
                 }
                 display += action.operation

@@ -38,6 +38,7 @@ fun CalculatorScreen(
     val scrollState = rememberScrollState()
 
     LaunchedEffect(state) {
+        scrollState.animateScrollTo(scrollState.maxValue)
         if (state == "Error") {
             Toast.makeText(context, "Invalid Operation", Toast.LENGTH_SHORT).show()
         }
@@ -63,7 +64,6 @@ fun CalculatorScreen(
                 maxLines = 1,
                 softWrap = false,
                 modifier = Modifier.horizontalScroll(scrollState)
-
             )
 
             IconButton(
